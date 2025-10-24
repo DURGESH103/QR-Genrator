@@ -57,10 +57,10 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Toggle Button - Always Visible */}
+      {/* Toggle Button - Hidden on Mobile */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="sidebar-toggle fixed top-4 left-4 z-50 p-3 bg-gray-900 hover:bg-gray-800 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+        className="sidebar-toggle fixed top-4 left-4 z-50 p-3 bg-gray-900 hover:bg-gray-800 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 hidden md:block"
       >
         <Menu className="h-5 w-5" />
       </button>
