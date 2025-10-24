@@ -1,0 +1,31 @@
+{
+  "name": "qr-generator-pro",
+  "version": "1.0.0",
+  "description": "Advanced QR Code Generator - MERN Stack Application",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "install-server": "cd backend && npm install",
+    "install-client": "cd frontend && npm install",
+    "install-all": "npm run install-server && npm run install-client",
+    "start": "cd backend && npm start"
+  },
+  "keywords": [
+    "qr-code",
+    "generator",
+    "mern",
+    "react",
+    "nodejs",
+    "mongodb",
+    "express",
+    "analytics"
+  ],
+  "author": "QR Generator Pro Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
