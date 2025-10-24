@@ -40,16 +40,20 @@ const ModernNavbar = () => {
   };
 
   const navLinks = [
-    { name: 'Features', href: '#features' },
-    { name: 'Generator', href: '#generator' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'Docs', href: '#docs' }
+    { name: 'Features', href: '#features', type: 'scroll' },
+    { name: 'Generator', href: '/create', type: 'route' },
+    { name: 'Pricing', href: '#pricing', type: 'scroll' },
+    { name: 'Docs', href: '#docs', type: 'scroll' }
   ];
 
-  const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (link) => {
+    if (link.type === 'route') {
+      navigate(link.href);
+    } else {
+      const element = document.querySelector(link.href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -90,7 +94,7 @@ const ModernNavbar = () => {
             {navLinks.map((link, index) => (
               <motion.button
                 key={link.name}
-                onClick={() => scrollToSection(link.href)}
+                onClick={() => handleNavClick(link)}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -278,7 +282,7 @@ const ModernNavbar = () => {
                 <button
                   key={link.name}
                   onClick={() => {
-                    scrollToSection(link.href);
+                    handleNavClick(link);
                     setIsMobileMenuOpen(false);
                   }}
                   className="block text-left w-full text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors"
