@@ -50,9 +50,20 @@ const ModernNavbar = () => {
     if (link.type === 'route') {
       navigate(link.href);
     } else {
-      const element = document.querySelector(link.href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      // If not on home page, navigate to home first then scroll
+      if (window.location.pathname !== '/' && window.location.pathname !== '/home') {
+        navigate('/home');
+        setTimeout(() => {
+          const element = document.querySelector(link.href);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        const element = document.querySelector(link.href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
   };

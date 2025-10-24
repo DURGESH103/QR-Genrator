@@ -48,6 +48,12 @@ const Layout = ({ children }) => {
 
 // Home Page Component
 const HomePage = () => {
+  const { isAuthenticated } = useAuth();
+  
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
+  
   return <ModernHomePage />;
 };
 
@@ -59,6 +65,7 @@ function App() {
           <Layout>
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/home" element={<ModernHomePage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route 
