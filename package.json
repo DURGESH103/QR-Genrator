@@ -16,5 +16,8 @@
     "express"
   ],
   "author": "QR Generator Pro Team",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.9.18"
+  }
 }
