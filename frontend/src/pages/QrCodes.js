@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { qrAPI } from '../utils/api';
 import { toast } from 'react-toastify';
@@ -22,11 +22,7 @@ const QrCodes = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  useEffect(() => {
-    fetchQrCodes();
-  }, [currentPage, searchTerm, filterType]);
-
-  const fetchQrCodes = async () => {
+  const fetchQrCodes = useCallback(async () => {
     try {
       setLoading(true);
       const params = {
@@ -35,7 +31,7 @@ const QrCodes = () => {
         search: searchTerm,
         type: filterType !== 'all' ? filterType : undefined
       };
-      
+
       const response = await qrAPI.getAll(params);
       setQrCodes(response.data.qrCodes || []);
       setTotalPages(response.data.totalPages || 1);
@@ -45,7 +41,11 @@ const QrCodes = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, searchTerm, filterType]);
+
+  useEffect(() => {
+    fetchQrCodes();
+  }, [fetchQrCodes]);
 
   const deleteQRCode = async (id) => {
     if (window.confirm('Are you sure you want to delete this QR code?')) {

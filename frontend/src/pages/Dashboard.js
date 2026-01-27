@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { analyticsAPI, qrAPI } from '../utils/api';
-import { 
-  QrCode, 
-  Eye, 
-  TrendingUp, 
+import {
+  QrCode,
+  Eye,
+  TrendingUp,
   Calendar,
   Plus,
-  Search,
-  Filter,
-  MoreVertical,
   Edit,
   Trash2,
   ExternalLink
@@ -23,7 +20,6 @@ const Dashboard = () => {
   const [recentQRCodes, setRecentQRCodes] = useState([]);
   const [scanData, setScanData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchDashboardData();
