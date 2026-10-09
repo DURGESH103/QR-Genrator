@@ -192,6 +192,8 @@ const QrCodes = () => {
               <option value="wifi">WiFi</option>
               <option value="vcard">vCard</option>
               <option value="file">File</option>
+              <option value="image">Image</option>
+              <option value="emoji">Emoji</option>
             </select>
           </div>
         </div>

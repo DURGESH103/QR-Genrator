@@ -13,7 +13,7 @@ const qrCodeSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['url', 'text', 'wifi', 'vcard', 'file'],
+    enum: ['url', 'text', 'wifi', 'vcard', 'file', 'email', 'phone', 'sms', 'whatsapp', 'location', 'social', 'event', 'image', 'emoji', 'logo'],
     required: true
   },
   content: {
@@ -28,6 +28,9 @@ const qrCodeSchema = new mongoose.Schema({
     foregroundColor: { type: String, default: '#000000' },
     backgroundColor: { type: String, default: '#ffffff' },
     logo: { type: String, default: '' },
+    logoSize: { type: Number, default: 0.22 },
+    logoBackground: { type: Boolean, default: true },
+    errorCorrectionLevel: { type: String, enum: ['L', 'M', 'Q', 'H'], default: 'H' },
     size: { type: Number, default: 200 },
     margin: { type: Number, default: 4 }
   },

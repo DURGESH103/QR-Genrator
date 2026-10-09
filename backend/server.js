@@ -8,6 +8,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const qrRoutes = require('./routes/qrRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
+const publicRoutes = require('./routes/publicRoutes');
 
 // Connect to database
 connectDB();
@@ -44,6 +45,7 @@ app.set('trust proxy', 1);
 app.use('/api/auth', authRoutes);
 app.use('/api/qr', qrRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/public', publicRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

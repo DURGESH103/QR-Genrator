@@ -44,11 +44,18 @@ export const authAPI = {
 export const qrAPI = {
   generate: (data) => api.post('/qr/generate', data),
   preview: (data) => api.post('/qr/preview', data),
+  uploadImage: (formData) => api.post('/qr/upload-image', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
   getAll: (params) => api.get('/qr', { params }),
   getOne: (id) => api.get(`/qr/${id}`),
   update: (id, data) => api.put(`/qr/${id}`, data),
   delete: (id) => api.delete(`/qr/${id}`),
   trackScan: (id) => api.post(`/qr/${id}/scan`),
+};
+
+// Public API (no auth) used by the /view/:id share page
+export const publicAPI = {
+  getQr: (id) => api.get(`/public/qr/${id}`),
+  imageUrl: (path) => `${API_BASE_URL}${path.replace(/^\/api/, '')}`,
 };
 
 // Analytics API

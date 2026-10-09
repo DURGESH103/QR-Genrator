@@ -15,6 +15,7 @@ import Dashboard from './pages/Dashboard';
 import CreateQr from './pages/CreateQr';
 import Analytics from './pages/Analytics';
 import QrCodes from './pages/QrCodes';
+import QrViewer from './pages/QrViewer';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -62,6 +63,10 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <Router>
+          <Routes>
+            {/* Public share page for Emoji / Image QR codes, without the app chrome */}
+            <Route path="/view/:id" element={<QrViewer />} />
+            <Route path="*" element={
           <Layout>
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -118,6 +123,8 @@ function App() {
               />
             </Routes>
           </Layout>
+            } />
+          </Routes>
           
           <ToastContainer
             position="top-right"
