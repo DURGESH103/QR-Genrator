@@ -27,8 +27,14 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 
 // CORS configuration
+// FRONTEND_URL may hold several comma-separated origins
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3001',
+  ...(process.env.FRONTEND_URL || '').split(',').map(o => o.trim().replace(/\/+$/, '')).filter(Boolean)
+];
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  origin: allowedOrigins,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
