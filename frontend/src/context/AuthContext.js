@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/api';
 
 const AuthContext = createContext();
 
@@ -72,7 +73,7 @@ export const AuthProvider = ({ children }) => {
 
     setAuthToken(token);
     try {
-      const res = await axios.get('/api/auth/profile');
+      const res = await axios.get(`${API_BASE_URL}/auth/profile`);
       dispatch({
         type: 'USER_LOADED',
         payload: res.data.user,
@@ -85,7 +86,9 @@ export const AuthProvider = ({ children }) => {
   // Register user
   const register = async (formData) => {
     try {
-      const res = await axios.post('/api/auth/register', formData);
+      const res = await axios.post(`${API_BASE_URL}/auth/register`, formData);
+      // Store before loadUser(): the reducer that also stores it may not have run yet
+      localStorage.setItem('token', res.data.token);
       dispatch({
         type: 'REGISTER_SUCCESS',
         payload: res.data,
@@ -95,16 +98,16 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       dispatch({
         type: 'REGISTER_FAIL',
-        payload: err.response.data.message,
+        payload: err.response?.data?.message || 'Registration failed',
       });
-      return { success: false, error: err.response.data.message };
+      return { success: false, error: err.response?.data?.message || 'Registration failed' };
     }
   };
 
   // Login user
   const login = async (formData) => {
     try {
-      const res = await axios.post('/api/auth/login', formData);
+      const res = await axios.post(`${API_BASE_URL}/auth/login`, formData);
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: res.data,

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Absolute backend URL in production (e.g. https://api.example.com/api); falls back to the dev proxy
-const API_BASE_URL = (process.env.REACT_APP_API_URL || '/api').replace(/\/+$/, '');
+export const API_BASE_URL = (process.env.REACT_APP_API_URL || '/api').replace(/\/+$/, '');
 
 const api = axios.create({
   baseURL: API_BASE_URL,
